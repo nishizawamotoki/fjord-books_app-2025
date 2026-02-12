@@ -24,3 +24,8 @@ ja:
       back_to_list: '一覧に戻る'
     buttons:
       destroy: '削除する'
+    notices:
+      success:
+        create: '本が追加されました。'
+        update: '本が編集されました。'
+        delete: '本が削除されました。'

@@ -39,6 +39,11 @@ en:
     submit:
       create: 'Create'
       update: 'Update'
+  notices:
+    success:
+      create: '%{model} was successfully created.'
+      update: '%{model} was successfully updated.'
+      delete: '%{model} was successfully destroyed.'
   books:
     titles:
       index: 'Books'
@@ -51,8 +56,3 @@ en:
       back_to_list: 'Back to books'
     buttons:
       destroy: 'Destroy this book'
-    notices:
-      success:
-        create: 'Book was successfully created.'
-        update: 'Book was successfully updated.'
-        delete: 'Book was successfully destroyed.'

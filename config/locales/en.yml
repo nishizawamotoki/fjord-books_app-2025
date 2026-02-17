@@ -28,4 +28,31 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      book:
+        title: 'Title'
+        memo: 'Memo'
+        author: 'Author'
+        picture: 'Picture'
+  helpers:
+    submit:
+      create: 'Create'
+      update: 'Update'
+  notices:
+    success:
+      create: '%{model} was successfully created.'
+      update: '%{model} was successfully updated.'
+      delete: '%{model} was successfully destroyed.'
+  books:
+    titles:
+      index: 'Books'
+      new: 'New book'
+      edit: 'Editing book'
+    links:
+      new: 'New books'
+      show: 'Show this book'
+      edit: 'Edit this book'
+      back_to_list: 'Back to books'
+    buttons:
+      destroy: 'Destroy this book'

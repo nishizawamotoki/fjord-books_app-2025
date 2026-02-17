@@ -1,21 +1,21 @@
 <div id="<%= dom_id book %>">
   <p>
-    <strong><%= Book.human_attribute_name('title') %>:</strong>
+    <strong>Title:</strong>
     <%= book.title %>
   </p>
 
   <p>
-    <strong><%= Book.human_attribute_name('memo') %>:</strong>
+    <strong>Memo:</strong>
     <%= book.memo %>
   </p>
 
   <p>
-    <strong><%= Book.human_attribute_name('author') %>:</strong>
+    <strong>Author:</strong>
     <%= book.author %>
   </p>
 
   <p>
-    <strong><%= Book.human_attribute_name('picture') %>:</strong>
+    <strong>Picture:</strong>
     <%= image_tag(book.picture_url) if book.picture.present? %>
   </p>
 

@@ -206,3 +206,11 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+# devise-i18n の辞書ファイルをカスタム、または不足分の追加
+  devise:
+    sessions:
+      logged_in_as: "ログイン中：%{email}"
+    shared:
+        links:
+          edit_my_account: アカウント編集
+          logout: ログアウト

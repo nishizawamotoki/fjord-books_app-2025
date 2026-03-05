@@ -23,16 +23,6 @@
   </head>
 
   <body class="<%= params[:action] %>">
-    <p>
-      <% if user_signed_in? %>
-        <%= t("devise.sessions.logged_in_as", email: current_user.email)%>
-        <%= link_to t("devise.shared.links.edit_my_account"), edit_user_registration_path %> |
-        <%= link_to t("devise.shared.links.logout"), destroy_user_session_path, data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to t("devise.shared.links.sign_up"), new_user_registration_path %> |
-        <%= link_to t("devise.shared.links.sign_in"), new_user_session_path %>
-      <% end %>
-    </p>
     <% if notice %>
       <p style="color: green"><%= notice %></p>
     <% end %>
@@ -40,5 +30,12 @@
       <p><%= alert %></p>
     <% end %>
     <%= yield %>
+    <p>
+      <% if user_signed_in? %>
+        <%= t("devise.sessions.logged_in_as", email: current_user.email)%> |
+        <%= link_to t("devise.shared.links.edit_my_account"), edit_user_registration_path %> |
+        <%= link_to t("devise.shared.links.logout"), destroy_user_session_path, data: { turbo_method: :delete } %>
+      <% end %>
+    </p>
   </body>
 </html>

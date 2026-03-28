@@ -1,5 +1,11 @@
 <div id="<%= dom_id user %>">
 
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar %>
+  <% else %>
+    <p>アイコン画像は設定されていません</p>
+  <% end %>
+
   <p>
     <strong><%= User.human_attribute_name(:email) %>:</strong>
     <%= user.email %>

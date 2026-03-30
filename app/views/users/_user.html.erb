@@ -3,7 +3,7 @@
   <% if user.avatar.attached? %>
     <%= image_tag user.avatar %>
   <% else %>
-    <p>アイコン画像は設定されていません</p>
+    <p><%= t('users.avatar.not_set') %></p>
   <% end %>
 
   <p>

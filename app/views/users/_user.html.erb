@@ -1,7 +1,7 @@
 <div id="<%= dom_id user %>">
 
   <% if user.avatar.attached? %>
-    <%= image_tag user.avatar %>
+    <%= image_tag user.avatar.variant(resize_to_limit: [100, 100]) %>
   <% else %>
     <p><%= t('users.avatar.not_set') %></p>
   <% end %>

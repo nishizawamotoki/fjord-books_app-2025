@@ -1,0 +1,22 @@
+<div id="<%= dom_id report %>">
+  <p>
+    <strong>Title:</strong>
+    <%= report.title %>
+  </p>
+
+  <p>
+    <strong>Author:</strong>
+    <%= report.user.name.presence || report.user.email %>
+  </p>
+
+  <p>
+    <strong>Created_at:</strong>
+    <%= report.created_at %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= report.content %>
+  </p>
+
+</div>

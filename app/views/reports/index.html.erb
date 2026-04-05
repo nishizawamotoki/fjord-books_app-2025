@@ -1,0 +1,17 @@
+<% content_for :title, "Reports" %>
+
+<h1>Reports</h1>
+
+<div id="reports" class="index-items">
+  <% @reports.each do |report| %>
+  <div class="index-item">
+    <%= render report %>
+    <p>
+      <%= link_to "Show this report", report %>
+    </p>
+  </div>  <% end %>
+</div>
+
+<nav class="page-nav">
+  <%= link_to "New report", new_report_path %>
+</nav>

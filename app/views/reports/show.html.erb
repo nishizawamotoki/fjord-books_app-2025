@@ -3,8 +3,12 @@
 </div>
 
 <nav class="page-nav">
-  <%= link_to "Edit this report", edit_report_path(@report) %> |
+  <% if @report.user_id == current_user.id %>
+    <%= link_to "Edit this report", edit_report_path(@report) %> |
+  <% end %>
   <%= link_to "Back to reports", reports_path %>
 
-  <%= button_to "Destroy this report", @report, method: :delete %>
+  <% if @report.user_id == current_user.id %>
+    <%= button_to "Destroy this report", @report, method: :delete %>
+  <% end %>
 </nav>

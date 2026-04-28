@@ -15,3 +15,7 @@ ja:
         postal_code: 郵便番号
         address: 住所
         self_introduction: 自己紹介文
+        avatar: アイコン画像
+  users:
+    avatar:
+      not_set: アイコン画像は設定されていません

@@ -14,3 +14,5 @@
     <%= button_to "Destroy this report", @report, method: :delete %>
   <% end %>
 </nav>
+
+<%= render "comments/form", commentable: @report, comment: @comment %>

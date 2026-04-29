@@ -1,0 +1,14 @@
+<div>
+  <p>
+    <strong>コメント:</strong>
+    <%= comment.content %>
+  </p>
+  <p>
+    <strong>投稿者:</strong>
+    <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
+  </p>
+  <p>
+    <strong>投稿日時:</strong>
+    <%= l comment.created_at, format: :long %>
+  </p>
+</div>

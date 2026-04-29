@@ -15,4 +15,10 @@
   <% end %>
 </nav>
 
+<% @comments.each do |comment| %>
+  <div>
+    <%= render comment %>
+  </div>
+<% end %>
+
 <%= render "comments/form", commentable: @report, comment: @comment %>

@@ -1,14 +1,20 @@
 class CommentsController < ApplicationController
   def create
-    @commentable = params[:book_id] ? Book.find(params[:book_id]) : Report.find(params[:report_id])
+    if params[:book_id]
+      @book = Book.find(params[:book_id])
+    else
+      @report = Report.find(params[:report_id])
+    end
+    @commentable = @book || @report
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
 
-    if @commentable.save
+    if @comment.save
       redirect_to @commentable, notice: "Comment was successfully created." 
     else
-      path = params[:book_id] ? 'books/show' : 'reports/show'
-      render path, status: :unprocessable_entity
+      view = params[:book_id] ? 'books/show' : 'reports/show'
+      @comments = @commentable.comments.includes(:user)
+      render view, status: :unprocessable_entity
     end
   end
 

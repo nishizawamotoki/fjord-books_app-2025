@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   def create
     if params[:book_id]
-      @book = Book.find(params[:book_id])
+      @book = Book.find(params.expect(:book_id))
     else
-      @report = Report.find(params[:report_id])
+      @report = Report.find(params.expect(:report_id))
     end
     @commentable = @book || @report
     @comment = @commentable.comments.build(comment_params)

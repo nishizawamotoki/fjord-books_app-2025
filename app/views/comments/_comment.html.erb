@@ -1,14 +1,14 @@
 <div>
   <p>
-    <strong>コメント:</strong>
+    <strong><%= Comment.human_attribute_name(:content) %>:</strong>
     <%= comment.content %>
   </p>
   <p>
-    <strong>投稿者:</strong>
+    <strong><%= Comment.human_attribute_name(:poster) %></strong>
     <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
   </p>
   <p>
-    <strong>投稿日時:</strong>
+    <strong><%= Comment.human_attribute_name(:created_at) %></strong>
     <%= l comment.created_at, format: :long %>
   </p>
 </div>

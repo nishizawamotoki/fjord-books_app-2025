@@ -27,7 +27,7 @@ class ReportsController < ApplicationController
     @report = current_user.reports.build(report_params)
 
     if @report.save
-      redirect_to @report, notice: "Report was successfully created."
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1 or /reports/1.json
   def update
     if @report.update(report_params)
-      redirect_to @report, notice: "Report was successfully updated."
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy!
 
-    redirect_to reports_path, status: :see_other, notice: "Report was successfully destroyed."
+    redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
   private
@@ -62,6 +62,6 @@ class ReportsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to reports_path, alert: "権限がありません" unless @report.user_id == current_user.id
+    redirect_to reports_path, alert: t('controllers.common.alert_authorization_failure') unless @report.user_id == current_user.id
   end
 end

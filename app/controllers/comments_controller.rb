@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @commentable, notice: "Comment was successfully created." 
+      redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
       view = params[:book_id] ? 'books/show' : 'reports/show'
       @comments = @commentable.comments.includes(:user)
@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
   def destroy
     commentable = @comment.commentable
     @comment.destroy!
-    redirect_to commentable, status: :see_other, notice: 'コメントが削除されました'
+    redirect_to commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
@@ -37,6 +37,6 @@ class CommentsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to root_path, alert: "権限がありません" unless @comment.user_id == current_user.id
+    redirect_to root_path, alert: t('controllers.common.alert_authorization_failure') unless @comment.user_id == current_user.id
   end
 end

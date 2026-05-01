@@ -1,11 +1,12 @@
-<% content_for :title, "New report" %>
+<% title = t('views.common.title_new', name: Report.model_name.human) %>
+<% content_for :title, title %>
 
-<h1>New report</h1>
+<h1><% title %></h1>
 
 <%= render "form", report: @report %>
 
 <br>
 
 <nav class="page-nav">
-  <%= link_to "Back to reports", reports_path %>
+  <%= link_to t('views.common.back', name: Report.model_name.human), reports_path %>
 </nav>

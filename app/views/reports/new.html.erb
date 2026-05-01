@@ -1,7 +1,7 @@
 <% title = t('views.common.title_new', name: Report.model_name.human) %>
 <% content_for :title, title %>
 
-<h1><% title %></h1>
+<h1><%= title %></h1>
 
 <%= render "form", report: @report %>
 

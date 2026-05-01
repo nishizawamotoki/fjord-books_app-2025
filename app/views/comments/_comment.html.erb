@@ -1,14 +1,19 @@
-<div>
-  <p>
-    <strong><%= Comment.human_attribute_name(:content) %>:</strong>
-    <%= comment.content %>
-  </p>
-  <p>
-    <strong><%= Comment.human_attribute_name(:poster) %></strong>
-    <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
-  </p>
-  <p>
-    <strong><%= Comment.human_attribute_name(:created_at) %></strong>
-    <%= l comment.created_at, format: :long %>
-  </p>
+<div class="comment-container" >
+  <div class="comment">
+    <div class="comment-header">
+      <div>
+        <%= Comment.human_attribute_name(:poster) %>: <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
+      </div>
+      <div>
+        <%= Comment.human_attribute_name(:created_at) %>: <%= l comment.created_at, format: :long %>
+      </div>
+    </div>
+    <div class="comment-content">
+      <%= comment.content %>
+    </div>
+  </div>
+  
+  <% if comment.user_id == current_user.id %>
+    <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
+  <% end %>
 </div>

@@ -11,13 +11,13 @@
   <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
 </nav>
 
-<% @comments.each do |comment| %>
-  <div>
-    <%= render comment %>
-  </div>
-  <% if comment.user_id == current_user.id %>
-    <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
-  <% end %>
-<% end %>
+<div class="comments-area">
+  <div class="comments-container">
+    <h2><%= Comment.model_name.human %></h2>
+    <% @comments.each do |comment| %>
+      <%= render comment, comment: comment %>
+    <% end %>
 
-<%= render "comments/form", commentable: @book, comment: @comment %>
+    <%= render "comments/form", commentable: @book, comment: @comment %>
+  </div>
+</div>

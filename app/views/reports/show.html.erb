@@ -1,7 +1,7 @@
-<% title = t('views.common.title_new', name: Report.model_name.human) %>
+<% title = t('views.common.title_show', name: Report.model_name.human) %>
 <% content_for :title, title %>
 
-<h1><% title %></h1>
+<h1><%= title %></h1>
 
 <div class="show-item">
   <%= render @report %>
@@ -18,13 +18,13 @@
   <% end %>
 </nav>
 
-<% @comments.each do |comment| %>
-  <div>
-    <%= render comment %>
-  </div>
-  <% if comment.user_id == current_user.id %>
-    <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
-  <% end %>
-<% end %>
+<div class="comments-area">
+  <div class="comments-container">
+    <h2><%= Comment.model_name.human %></h2>
+    <% @comments.each do |comment| %>
+      <%= render comment, comment: comment %>
+    <% end %>
 
-<%= render "comments/form", commentable: @report, comment: @comment %>
+    <%= render "comments/form", commentable: @report, comment: @comment %>
+  </div>
+</div>

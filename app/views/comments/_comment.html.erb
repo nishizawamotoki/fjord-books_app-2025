@@ -1,4 +1,4 @@
-<div class="comment-container" >
+<div class="comment-container">
   <div class="comment">
     <div class="comment-header">
       <div>
@@ -12,7 +12,7 @@
       <%= comment.content %>
     </div>
   </div>
-  
+
   <% if comment.user_id == current_user.id %>
     <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
   <% end %>

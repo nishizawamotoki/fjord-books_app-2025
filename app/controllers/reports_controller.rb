@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[ show edit update destroy ]
+  before_action :set_report, only: %i[show edit update destroy]
   before_action :authorize_user!, only: %i[edit update destroy]
 
   # GET /reports or /reports.json
@@ -19,8 +21,7 @@ class ReportsController < ApplicationController
   end
 
   # GET /reports/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reports or /reports.json
   def create
@@ -58,7 +59,7 @@ class ReportsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_params
-    params.expect(report: [ :title, :content ])
+    params.expect(report: %i[title content])
   end
 
   def authorize_user!

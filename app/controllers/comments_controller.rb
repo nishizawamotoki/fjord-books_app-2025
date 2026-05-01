@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_comment, only: :destroy
   before_action :authorize_user!, only: :destroy
@@ -33,7 +35,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.expect(comment: :content)
   end
 
   def authorize_user!

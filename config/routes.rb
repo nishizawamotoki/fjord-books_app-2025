@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  resources :books do
-    resources :comments
+  concern :commentable do
+    resources :comments, shallow: true
   end
-  resources :reports do
-    resources :comments
-  end
+  resources :books, concerns: :commentable
+  resources :reports, concerns: :commentable
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   devise_for :users
   root to: 'books#index'
-  resources :books
   resources :users, only: %i(index show)
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

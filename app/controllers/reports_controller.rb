@@ -63,6 +63,6 @@ class ReportsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to reports_path, alert: t('controllers.common.alert_authorization_failure') unless @report.user_id == current_user.id
+    redirect_to reports_path, alert: t('controllers.common.alert_authorization_failure') if @report.user_id != current_user.id
   end
 end

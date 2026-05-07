@@ -39,6 +39,6 @@ class CommentsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to root_path, alert: t('controllers.common.alert_authorization_failure') unless @comment.user_id == current_user.id
+    redirect_to root_path, alert: t('controllers.common.alert_authorization_failure') if @comment.user_id != current_user.id
   end
 end

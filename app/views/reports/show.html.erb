@@ -1,0 +1,30 @@
+<% title = t('views.common.title_show', name: Report.model_name.human) %>
+<% content_for :title, title %>
+
+<h1><%= title %></h1>
+
+<div class="show-item">
+  <%= render @report %>
+</div>
+
+<nav class="page-nav">
+  <% if @report.user_id == current_user.id %>
+    <%= link_to t('views.common.edit', name: Report.model_name.human), edit_report_path(@report) %> |
+  <% end %>
+  <%= link_to t('views.common.back', name: Report.model_name.human), reports_path %>
+
+  <% if @report.user_id == current_user.id %>
+    <%= button_to t('views.common.destroy', name: Report.model_name.human), @report, method: :delete %>
+  <% end %>
+</nav>
+
+<div class="comments-area">
+  <div class="comments-container">
+    <h2><%= Comment.model_name.human %></h2>
+    <% @comments.each do |comment| %>
+      <%= render comment, comment: comment %>
+    <% end %>
+
+    <%= render "comments/form", commentable: @report, comment: @comment %>
+  </div>
+</div>

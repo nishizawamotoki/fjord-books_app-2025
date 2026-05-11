@@ -68,11 +68,11 @@ class ReportsController < ApplicationController
   end
 
   def mentioned_report_ids(content)
-    content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i)
+    content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i).uniq
   end
 
   def build_report_mention_params(report_id, mentioned_report_ids)
-    mentioned_report_ids.map do |id|
+    (mentioned_report_ids & Report.ids).map do |id|
       {
         mentioning_report_id: report_id,
         mentioned_report_id: id

@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
     end
     redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
   rescue ActiveRecord::RecordInvalid
-    @report.errors.add(:base, '日報の作成に失敗しました')
+    @report.errors.add(:base, t('controllers.common.error_create', name: Report.model_name.human))
     render :new, status: :unprocessable_entity
   end
 
@@ -47,7 +47,7 @@ class ReportsController < ApplicationController
     end
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
   rescue ActiveRecord::RecordInvalid
-    @report.errors.add(:base, '日報の更新に失敗しました')
+    @report.errors.add(:base, t('controllers.common.error_update', name: Report.model_name.human))
     render :edit, status: :unprocessable_entity
   end
 

@@ -7,7 +7,7 @@
 <%= render 'application/comments', commentable: @report %>
 
 <% if @mentioned_reports.present? %>
-  <p>この日報は以下の日報からリンクされています</p>
+  <p><%= t('application.reports.mentioned_reports') %></p>
   <% @mentioned_reports.each do |m| %>
   <ul>
     <li>

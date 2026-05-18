@@ -41,7 +41,7 @@ class Report < ApplicationRecord
   end
 
   def build_report_mention_params(report_id, mentioned_report_ids)
-    (mentioned_report_ids & Report.ids).map do |id|
+    Report.where(id: mentioned_report_ids).pluck(:id).map do |id|
       {
         mentioning_report_id: report_id,
         mentioned_report_id: id

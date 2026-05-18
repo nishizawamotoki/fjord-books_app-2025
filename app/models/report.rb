@@ -22,4 +22,30 @@ class Report < ApplicationRecord
   def created_on
     created_at.to_date
   end
+
+  def sync_report_mentions!
+    new_mentioned_report_ids = mentioned_report_ids
+    existing_mentioned_report_ids = outgoing_mentions.map(&:mentioned_report_id)
+
+    add_ids = (new_mentioned_report_ids - existing_mentioned_report_ids)
+    remove_ids = (existing_mentioned_report_ids - new_mentioned_report_ids)
+
+    ReportMention.create!(build_report_mention_params(id, add_ids)) if add_ids.present?
+    ReportMention.where(mentioning_report_id: id, mentioned_report_id: remove_ids).destroy_all if remove_ids.present?
+  end
+
+  private
+
+  def mentioned_report_ids
+    content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i).uniq
+  end
+
+  def build_report_mention_params(report_id, mentioned_report_ids)
+    (mentioned_report_ids & Report.ids).map do |id|
+      {
+        mentioning_report_id: report_id,
+        mentioned_report_id: id
+      }
+    end
+  end
 end

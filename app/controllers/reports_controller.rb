@@ -23,8 +23,7 @@ class ReportsController < ApplicationController
 
     Report.transaction do
       @report.save!
-      new_mentioned_report_ids = mentioned_report_ids(@report.content)
-      new_mentioned_report_ids.present? && ReportMention.create!(build_report_mention_params(@report.id, new_mentioned_report_ids))
+      @report.sync_report_mentions!
     end
     redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
   rescue ActiveRecord::RecordInvalid
@@ -35,15 +34,7 @@ class ReportsController < ApplicationController
   def update
     Report.transaction do
       @report.update!(report_params)
-
-      new_mentioned_report_ids = mentioned_report_ids(@report.content)
-      existing_mentioned_report_ids = @report.outgoing_mentions.map(&:mentioned_report_id)
-
-      add_ids = (new_mentioned_report_ids - existing_mentioned_report_ids)
-      remove_ids = (existing_mentioned_report_ids - new_mentioned_report_ids)
-
-      add_ids.present? && ReportMention.create!(build_report_mention_params(@report.id, add_ids))
-      remove_ids.present? && ReportMention.where(mentioning_report_id: @report.id, mentioned_report_id: remove_ids).destroy_all
+      @report.sync_report_mentions!
     end
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
   rescue ActiveRecord::RecordInvalid
@@ -65,18 +56,5 @@ class ReportsController < ApplicationController
 
   def report_params
     params.expect(report: %i[user_id title content])
-  end
-
-  def mentioned_report_ids(content)
-    content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i).uniq
-  end
-
-  def build_report_mention_params(report_id, mentioned_report_ids)
-    (mentioned_report_ids & Report.ids).map do |id|
-      {
-        mentioning_report_id: report_id,
-        mentioned_report_id: id
-      }
-    end
   end
 end

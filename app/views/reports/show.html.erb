@@ -6,6 +6,17 @@
 
 <%= render 'application/comments', commentable: @report %>
 
+<% if @mentioned_reports.present? %>
+  <p><%= t('application.reports.mentioned_reports') %></p>
+  <% @mentioned_reports.each do |m| %>
+  <ul>
+    <li>
+      <%= m.title %> (<%= m.user.name.present? ? m.user.name : m.user.email %> - <%= l m.created_at, format: :long %>)
+    </li>
+  </ul>
+  <% end %>
+<% end %>
+
 <nav class="page-nav">
   <% if @report.editable?(current_user) %>
     <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |

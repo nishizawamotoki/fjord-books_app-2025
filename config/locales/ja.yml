@@ -208,6 +208,8 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      error_create: "%{name}の作成に失敗しました"
+      error_update: "%{name}の更新に失敗しました"
   layouts:
     menu:
       menu: メニュー
@@ -217,6 +219,8 @@ ja:
       create: コメントする
       delete: 削除
       no_comments: コメントはまだありません
+    reports:
+      mentioned_reports: この日報は以下の日報内で言及されています
   # devise-i18n-viewsをオーバーライド
   devise:
     registrations:

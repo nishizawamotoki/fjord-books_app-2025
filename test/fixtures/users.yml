@@ -8,6 +8,7 @@
 tanaka:
   name: 田中
   email: tanaka@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
 
 sato:
   name:

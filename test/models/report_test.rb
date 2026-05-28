@@ -16,19 +16,23 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test '#created_on 作成日時を Date オブジェクトにして返す' do
-    assert_equal @report.created_at.to_date, @report.created_on
+    assert_equal Date.new(2026, 5, 14), @report.created_on
   end
 
   test '#save_mentions 日報保存時に、過去の言及関係が削除され、新しい言及関係が作成される' do
     sato_report = reports(:sato_report)
+    yamada_report = reports(:yamada_report)
     watanabe_report = reports(:watanabe_report)
-    @report.content = mentioned_report_url(sato_report.id)
+
+    @report.content = "#{mentioned_report_url(sato_report.id)} と #{mentioned_report_url(yamada_report.id)} を参考にしました。"
     @report.save
     assert ReportMention.exists?(mentioning: @report, mentioned: sato_report)
+    assert ReportMention.exists?(mentioning: @report, mentioned: yamada_report)
 
-    @report.content = mentioned_report_url(watanabe_report.id)
+    @report.content = "#{mentioned_report_url(watanabe_report.id)} と #{mentioned_report_url(yamada_report.id)} を参考にしました。"
     @report.save
     assert_not ReportMention.exists?(mentioning: @report, mentioned: sato_report)
+    assert ReportMention.exists?(mentioning: @report, mentioned: yamada_report)
     assert ReportMention.exists?(mentioning: @report, mentioned: watanabe_report)
   end
 

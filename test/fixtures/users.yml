@@ -17,3 +17,7 @@ sato:
 watanabe:
   name: 渡辺
   email: watanabe@example.com
+
+yamada:
+  name: 山田
+  email: yamada@example.com

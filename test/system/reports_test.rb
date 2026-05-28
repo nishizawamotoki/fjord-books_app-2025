@@ -31,8 +31,13 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test '日報を削除する' do
+    # 削除前は表示されていることを確認
+    visit reports_url
+    assert_text reports(:tanaka_report).title
+
     visit report_path(reports(:tanaka_report).id)
     click_button 'この日報を削除'
     assert_text '日報が削除されました。'
+    assert_no_text reports(:tanaka_report).title
   end
 end

@@ -4,44 +4,40 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    @report = reports(:one)
+    visit root_url
+    fill_in 'Eメール', with: users(:tanaka).email
+    fill_in 'パスワード', with: 'foobar'
+    click_button 'ログイン'
+    assert_text 'ログインしました'
   end
 
-  test 'visiting the index' do
+  test '日報を作成する' do
     visit reports_url
-    assert_selector 'h1', text: 'Reports'
+    click_link '日報の新規作成'
+    fill_in 'タイトル', with: '日報作成のテスト用日報'
+    fill_in '内容', with: '日報の作成をテストするのための日報です。'
+    click_button '登録する'
+    assert_text '日報が作成されました。'
+    assert_text '日報作成のテスト用日報'
   end
 
-  test 'should create report' do
+  test '日報を更新する' do
+    visit edit_report_path(reports(:tanaka_report).id)
+    fill_in 'タイトル', with: '田中の日報改'
+    fill_in '内容', with: '更新後の田中の日報です。'
+    click_button '更新する'
+    assert_text '日報が更新されました。'
+    assert_text '田中の日報改'
+  end
+
+  test '日報を削除する' do
+    # 削除前は表示されていることを確認
     visit reports_url
-    click_on 'New report'
+    assert_text reports(:tanaka_report).title
 
-    fill_in 'Content', with: @report.content
-    fill_in 'Title', with: @report.title
-    fill_in 'User', with: @report.user_id
-    click_on 'Create Report'
-
-    assert_text 'Report was successfully created'
-    click_on 'Back'
-  end
-
-  test 'should update Report' do
-    visit report_url(@report)
-    click_on 'Edit this report', match: :first
-
-    fill_in 'Content', with: @report.content
-    fill_in 'Title', with: @report.title
-    fill_in 'User', with: @report.user_id
-    click_on 'Update Report'
-
-    assert_text 'Report was successfully updated'
-    click_on 'Back'
-  end
-
-  test 'should destroy Report' do
-    visit report_url(@report)
-    click_on 'Destroy this report', match: :first
-
-    assert_text 'Report was successfully destroyed'
+    visit report_path(reports(:tanaka_report).id)
+    click_button 'この日報を削除'
+    assert_text '日報が削除されました。'
+    assert_no_text reports(:tanaka_report).title
   end
 end
